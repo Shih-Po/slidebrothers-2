@@ -1,1 +1,6 @@
-.ipynb_checkpoints/
+*.ipynb_*
+*__pycache__*
+*DS_Store*
+
+crawlers/drivers/*
+crawlers/config.py
