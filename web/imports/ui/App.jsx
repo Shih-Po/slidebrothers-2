@@ -20,6 +20,13 @@ class App extends Component {
           <h1>Todo List</h1>
         </header>
 
+        <form className="new-task" onSubmit={this.handleSubmit} >
+          <input
+            type="text"
+            ref={(c) => { this.textInput = c; }}
+            placeholder="Type to add new tasks"
+          />
+        </form>
         <ul>
           {this.renderTasks()}
         </ul>
