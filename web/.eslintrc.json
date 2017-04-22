@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "airbnb"
+  ],
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import"
+  ],
+  "rules": {
+    "import/no-extraneous-dependencies": "off",
+    "import/extensions": [
+      "error",
+      {
+        "html": "always",
+        "js": "never"
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": "meteor"
+  }
+}
