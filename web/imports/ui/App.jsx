@@ -7,6 +7,26 @@ import Task from './Task.jsx';
 
 // App component - represents the whole app
 class App extends Component {
+  constructor() {
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    // Find the text field via the React ref
+    const text = this.textInput.value.trim();
+
+    Tasks.insert({
+      text,
+      createdAt: new Date(), // current time
+    });
+
+    // Clear form
+    this.textInput.value = '';
+  }
+
   renderTasks() {
     return this.props.tasks.map(task => (
       <Task key={task._id} task={task} />
