@@ -3,4 +3,5 @@
 *DS_Store*
 
 crawlers/drivers/*
+crawlers/ghostdriver.log
 crawlers/config.py
