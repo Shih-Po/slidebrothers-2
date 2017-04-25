@@ -16,7 +16,8 @@
         "html": "always",
         "js": "never"
       }
-    ]
+    ],
+   "linebreak-style": ["error", "windows"]
   },
   "settings": {
     "import/resolver": "meteor"
