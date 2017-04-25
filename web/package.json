@@ -1,5 +1,5 @@
 {
-  "name": "index",
+  "name": "slidebrothers2",
   "private": true,
   "scripts": {
     "start": "meteor run"
