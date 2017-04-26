@@ -22,3 +22,5 @@ materialize:materialize@=0.97.7
 kadira:react-layout
 static-html
 react-meteor-data
+accounts-ui
+accounts-password
