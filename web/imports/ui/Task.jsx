@@ -35,12 +35,12 @@ export default class Task extends Component {
         <input
           type="checkbox"
           className="filled-in"
-          id="checkbox"
+          id="checkbox-filled-in"
           readOnly
           checked={this.props.task.checked}
           onClick={this.toggleChecked}
         />
-        <label className="text" htmlFor="checkbox">{this.props.task.text}</label>
+        <label className="text" htmlFor="checkbox-filled-in">{this.props.task.text}</label>
       </li>
     );
   }
