@@ -67,6 +67,7 @@ class App extends Component {
 
         <input
           type="checkbox"
+          className="filled-in"
           id="checkbox-hide-completed"
           readOnly
           checked={this.state.hideCompleted}
