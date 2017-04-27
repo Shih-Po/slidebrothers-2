@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import Tasks from '../api/tasks';
+import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
 import Task from './Task.jsx';
 
@@ -78,6 +79,7 @@ class App extends Component {
             placeholder="Type to add new tasks"
           />
         </form>
+        <AccountsUIWrapper />
 
         <ul>
           {this.renderTasks()}
