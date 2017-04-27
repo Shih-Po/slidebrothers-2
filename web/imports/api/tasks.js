@@ -5,6 +5,20 @@ import { check } from 'meteor/check';
 const Tasks = new Mongo.Collection('tasks');
 export default Tasks;
 
+if (Meteor.isServer) {
+  // This code only runs on the server
+  // Only publish tasks that are public or belong to the current user
+  Meteor.publish('tasks', function PublishTasks() {
+    return Tasks.find({
+      $or: [
+        { private: { $ne: true } },
+        { owner: this.userId },
+      ],
+    });
+  });
+}
+
+
 Meteor.methods({
   'tasks.insert': (text) => {
     check(text, String);
