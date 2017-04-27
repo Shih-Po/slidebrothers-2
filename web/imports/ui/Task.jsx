@@ -8,6 +8,7 @@ export default class Task extends Component {
   constructor() {
     super();
     this.toggleChecked = this.toggleChecked.bind(this);
+    this.togglePrivate = this.togglePrivate.bind(this);
     this.deleteThisTask = this.deleteThisTask.bind(this);
   }
 
