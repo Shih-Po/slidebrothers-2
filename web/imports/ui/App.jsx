@@ -72,14 +72,17 @@ class App extends Component {
           Hide Completed Tasks
         </label>
 
-        <form className="new-task" onSubmit={this.handleSubmit} >
-          <input
-            type="text"
-            ref={(c) => { this.textInput = c; }}
-            placeholder="Type to add new tasks"
-          />
-        </form>
         <AccountsUIWrapper />
+
+        { this.props.currentUser ?
+          <form className="new-task" onSubmit={this.handleSubmit} >
+            <input
+              type="text"
+              ref={(c) => { this.textInput = c; }}
+              placeholder="Type to add new tasks"
+            />
+          </form> : ''
+        }
 
         <ul>
           {this.renderTasks()}
