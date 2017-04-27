@@ -40,7 +40,10 @@ export default class Task extends Component {
           checked={this.props.task.checked}
           onClick={this.toggleChecked}
         />
-        <label className="text" htmlFor={this.props.task._id}>{this.props.task.text}</label>
+
+        <span className="text" htmlFor={this.props.task._id}>
+          <strong>{this.props.task.username}</strong>: {this.props.task.text}
+        </span>
       </li>
     );
   }
