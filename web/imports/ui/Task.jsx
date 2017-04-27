@@ -32,9 +32,15 @@ export default class Task extends Component {
 
     return (
       <li className={taskClassName}>
-        <button className="delete" onClick={this.deleteThisTask}>
+        <a className="delete btn" onClick={this.deleteThisTask}>
           &times;
-        </button>
+        </a>
+
+        { this.props.showPrivateButton ? (
+          <a className="toggle-private btn" onClick={this.togglePrivate}>
+            { this.props.task.private ? 'Private' : 'Public' }
+          </a>
+        ) : ''}
 
         <input
           type="checkbox"
@@ -44,10 +50,9 @@ export default class Task extends Component {
           checked={this.props.task.checked}
           onClick={this.toggleChecked}
         />
-
-        <span className="text" htmlFor={this.props.task._id}>
+        <label className="text" htmlFor={this.props.task._id}>
           <strong>{this.props.task.username}</strong>: {this.props.task.text}
-        </span>
+        </label>
       </li>
     );
   }
