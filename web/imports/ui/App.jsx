@@ -108,3 +108,4 @@ export default createContainer(() => ({
   incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
   currentUser: Meteor.user(),
 }), App);
+  Meteor.subscribe('tasks');
