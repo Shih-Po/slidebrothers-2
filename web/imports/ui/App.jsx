@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import CasePtt from '../api/case_ptt/collections';
+import CasesPtt from '../api/cases_ptt/collections';
 import Tasks from '../api/tasks';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
@@ -36,7 +36,7 @@ class App extends Component {
   toggleHideCompleted() {
     this.setState({
       hideCompleted: !this.state.hideCompleted,
-    >});
+    });
   }
 
   renderTasks() {
@@ -58,9 +58,9 @@ class App extends Component {
     });
   }
 
-  renderCasePtt() {
-    return this.props.casePtt.map(c => (
-        <Case key={c._id} case={c} />
+  renderCasesPtt() {
+    return this.props.casesPtt.map(casePtt => (
+        <CasePtt key={casePtt._id} casePtt={casePtt} />
     ))
   }
 
@@ -102,7 +102,7 @@ class App extends Component {
         </ul>
 
         <ul>
-          {this.renderCasePtt()}
+          {this.renderCasesPtt()}
         </ul>
       </div>
     );
@@ -110,7 +110,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  casePtt: PropTypes.array.isRequired,
+  casesPtt: PropTypes.array.isRequired,
   tasks: PropTypes.array.isRequired,
   incompleteCount: PropTypes.number.isRequired,
   currentUser: PropTypes.object,
@@ -118,8 +118,10 @@ App.propTypes = {
 
 export default createContainer(() => {
   Meteor.subscribe('tasks');
+  Meteor.subscribe('case_ptt');
 
   return {
+    casesPtt: CasesPtt.find().fetch(),
     tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
     incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
     currentUser: Meteor.user(),
