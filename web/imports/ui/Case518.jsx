@@ -8,7 +8,7 @@ export default class Case518 extends Component {
 
   render() {
     return (
-      <li className="case-518">
+      <li className="collection-item">
         <label className="text">
           <strong>{this.props.case518.title}</strong>
         </label>
