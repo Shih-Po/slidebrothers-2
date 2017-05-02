@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import CasePtt from '../api/case_ptt/collections';
 import Tasks from '../api/tasks';
+import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
 import CasePtt from './CasePtt.jsx';
 import Task from './Task.jsx';
@@ -25,10 +27,7 @@ class App extends Component {
     // Find the text field via the React ref
     const text = this.textInput.value.trim();
 
-    Tasks.insert({
-      text,
-      createdAt: new Date(), // current time
-    });
+    Meteor.call('tasks.insert', text);
 
     // Clear form
     this.textInput.value = '';
@@ -45,9 +44,18 @@ class App extends Component {
     if (this.state.hideCompleted) {
       filteredTasks = filteredTasks.filter(task => !task.checked);
     }
-    return filteredTasks.map(task => (
-      <Task key={task._id} task={task} />
-    ));
+    return filteredTasks.map((task) => {
+      const currentUserId = this.props.currentUser ? this.props.currentUser._id : null;
+      const showPrivateButton = task.owner === currentUserId;
+
+      return (
+        <Task
+          key={task._id}
+          task={task}
+          showPrivateButton={showPrivateButton}
+        />
+      );
+    });
   }
 
   renderCasePtt() {
@@ -67,6 +75,7 @@ class App extends Component {
 
         <input
           type="checkbox"
+          className="filled-in"
           id="checkbox-hide-completed"
           readOnly
           checked={this.state.hideCompleted}
@@ -76,13 +85,17 @@ class App extends Component {
           Hide Completed Tasks
         </label>
 
-        <form className="new-task" onSubmit={this.handleSubmit} >
-          <input
-            type="text"
-            ref={(c) => { this.textInput = c; }}
-            placeholder="Type to add new tasks"
-          />
-        </form>
+        <AccountsUIWrapper />
+
+        { this.props.currentUser ?
+          <form className="new-task" onSubmit={this.handleSubmit} >
+            <input
+              type="text"
+              ref={(c) => { this.textInput = c; }}
+              placeholder="Type to add new tasks"
+            />
+          </form> : ''
+        }
 
         <ul>
           {this.renderTasks()}
@@ -100,11 +113,15 @@ App.propTypes = {
   casePtt: PropTypes.array.isRequired,
   tasks: PropTypes.array.isRequired,
   incompleteCount: PropTypes.number.isRequired,
+  currentUser: PropTypes.object,
 };
 
 export default createContainer(() => {
+  Meteor.subscribe('tasks');
+
   return {
     tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
     incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
+    currentUser: Meteor.user(),
   };
 }, App);
