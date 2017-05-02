@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 
+import CasePtt from '../api/case_ptt/collections';
 import Tasks from '../api/tasks';
 
+import CasePtt from './CasePtt.jsx';
 import Task from './Task.jsx';
 
 // App component - represents the whole app
@@ -35,7 +37,7 @@ class App extends Component {
   toggleHideCompleted() {
     this.setState({
       hideCompleted: !this.state.hideCompleted,
-    });
+    >});
   }
 
   renderTasks() {
@@ -46,6 +48,12 @@ class App extends Component {
     return filteredTasks.map(task => (
       <Task key={task._id} task={task} />
     ));
+  }
+
+  renderCasePtt() {
+    return this.props.casePtt.map(c => (
+        <Case key={c._id} case={c} />
+    ))
   }
 
   render() {
@@ -79,12 +87,17 @@ class App extends Component {
         <ul>
           {this.renderTasks()}
         </ul>
+
+        <ul>
+          {this.renderCasePtt()}
+        </ul>
       </div>
     );
   }
 }
 
 App.propTypes = {
+  casePtt: PropTypes.array.isRequired,
   tasks: PropTypes.array.isRequired,
   incompleteCount: PropTypes.number.isRequired,
 };
