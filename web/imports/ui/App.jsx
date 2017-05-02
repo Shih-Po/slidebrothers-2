@@ -171,9 +171,9 @@ export default createContainer(() => {
   Meteor.subscribe('case_ptt');
 
   return {
-    cases104: Cases104.find({}, { limit: 50 }).fetch(),
-    cases518: Cases518.find({}, { limit: 50 }).fetch(),
-    casesPtt: CasesPtt.find({}, { limit: 50 }).fetch(),
+    cases104: Cases104.find({}, { limit: 50, sort: { _id: -1 } }).fetch(),
+    cases518: Cases518.find({}, { limit: 50, sort: { _id: -1 } }).fetch(),
+    casesPtt: CasesPtt.find({}, { limit: 50, sort: { _id: -1 } }).fetch(),
     cases104Count: Cases104.find().count(),
     cases518Count: Cases518.find().count(),
     casesPttCount: CasesPtt.find().count(),
