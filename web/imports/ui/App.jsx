@@ -84,7 +84,7 @@ class App extends Component {
     return (
       <div className="container">
         <header>
-          <h3>接案佈告欄</h3>
+          <h1>接案佈告欄</h1>
         </header>
 
         {/*<h1>Todo List ({this.props.incompleteCount})</h1>*/}
@@ -119,28 +119,20 @@ class App extends Component {
 
         <div className="row">
           <div className="col s4">
-            <ul className="collection with-header">
-              <li className="collection-header">
-                <h5>104 ({this.props.cases104Count})</h5>
-              </li>
+            <li>104 ({this.props.cases104Count})</li>
+            <ul>
               {this.renderCases104()}
             </ul>
           </div>
           <div className="col s4">
-
-            <ul className="collection with-header">
-              <li className="collection-header">
-                <h5>518 ({this.props.cases518Count})</h5>
-              </li>
+            <li>518 ({this.props.cases518Count})</li>
+            <ul>
               {this.renderCases518()}
             </ul>
           </div>
           <div className="col s4">
-
-            <ul className="collection with-header">
-              <li className="collection-header">
-                <h5>Ptt ({this.props.casesPttCount})</h5>
-              </li>
+            <li>Ptt ({this.props.casesPttCount})</li>
+            <ul>
               {this.renderCasesPtt()}
             </ul>
           </div>

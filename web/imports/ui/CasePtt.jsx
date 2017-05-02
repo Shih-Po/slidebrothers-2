@@ -8,7 +8,7 @@ export default class CasePtt extends Component {
 
   render() {
     return (
-      <li className="collection-item">
+      <li className="case-ptt">
         <label className="text">
           <strong>{this.props.casePtt.title}</strong>
         </label>

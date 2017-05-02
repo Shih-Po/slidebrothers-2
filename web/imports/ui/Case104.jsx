@@ -8,7 +8,7 @@ export default class Case104 extends Component {
 
   render() {
     return (
-      <li className="collection-item">
+      <li className="case-104">
         <label className="text">
           <strong>{this.props.case104.title}</strong>
         </label>
