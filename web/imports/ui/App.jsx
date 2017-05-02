@@ -68,38 +68,38 @@ class App extends Component {
     return (
       <div className="container">
         <header>
-          <h1>Todo List</h1>
+          <h1>接案佈告欄</h1>
         </header>
 
-        <h1>Todo List ({this.props.incompleteCount})</h1>
+        {/*<h1>Todo List ({this.props.incompleteCount})</h1>*/}
 
-        <input
-          type="checkbox"
-          className="filled-in"
-          id="checkbox-hide-completed"
-          readOnly
-          checked={this.state.hideCompleted}
-          onClick={this.toggleHideCompleted}
-        />
-        <label className="hide-completed" htmlFor="checkbox-hide-completed">
-          Hide Completed Tasks
-        </label>
+        {/*<input*/}
+          {/*type="checkbox"*/}
+          {/*className="filled-in"*/}
+          {/*id="checkbox-hide-completed"*/}
+          {/*readOnly*/}
+          {/*checked={this.state.hideCompleted}*/}
+          {/*onClick={this.toggleHideCompleted}*/}
+        {/*/>*/}
+        {/*<label className="hide-completed" htmlFor="checkbox-hide-completed">*/}
+          {/*Hide Completed Tasks*/}
+        {/*</label>*/}
 
-        <AccountsUIWrapper />
+        {/*<AccountsUIWrapper />*/}
 
-        { this.props.currentUser ?
-          <form className="new-task" onSubmit={this.handleSubmit} >
-            <input
-              type="text"
-              ref={(c) => { this.textInput = c; }}
-              placeholder="Type to add new tasks"
-            />
-          </form> : ''
-        }
+        {/*{ this.props.currentUser ?*/}
+          {/*<form className="new-task" onSubmit={this.handleSubmit} >*/}
+            {/*<input*/}
+              {/*type="text"*/}
+              {/*ref={(c) => { this.textInput = c; }}*/}
+              {/*placeholder="Type to add new tasks"*/}
+            {/*/>*/}
+          {/*</form> : ''*/}
+        {/*}*/}
 
-        <ul>
-          {this.renderTasks()}
-        </ul>
+        {/*<ul>*/}
+          {/*{this.renderTasks()}*/}
+        {/*</ul>*/}
 
         <ul>
           {this.renderCasesPtt()}
