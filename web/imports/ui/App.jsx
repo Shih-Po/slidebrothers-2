@@ -89,6 +89,16 @@ class App extends Component {
 
         {/*<h1>Todo List ({this.props.incompleteCount})</h1>*/}
 
+        <div className="row">
+          <form className="col s12">
+            <div className="row">
+              <div className="input-field col s10 offset-s1">
+                <input id="input-text" type="text"/>
+                <label htmlFor="input-text">搜尋案件</label>
+              </div>
+            </div>
+          </form>
+        </div>
         {/*<input*/}
           {/*type="checkbox"*/}
           {/*className="filled-in"*/}
