@@ -29,6 +29,7 @@ header {
     background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
     padding: 20px 15px 15px 15px;
     position: relative;
+    text-align: center;
 }
 
 #login-buttons {
