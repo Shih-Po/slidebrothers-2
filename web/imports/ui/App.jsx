@@ -37,6 +37,16 @@ class App extends Component {
     this.textInput.value = '';
   }
 
+  handleKeyUp(event) {
+    event.preventDefault();
+
+    const text = this.textInput.value.trim();
+
+    this.setState({
+      keyword: text,
+    });
+  }
+
   toggleHideCompleted() {
     this.setState({
       hideCompleted: !this.state.hideCompleted,
