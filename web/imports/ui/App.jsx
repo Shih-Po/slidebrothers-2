@@ -89,19 +89,34 @@ class App extends Component {
 
         <div className="row">
           <div className="col s4">
-            <li>104 ({this.props.cases104Count})</li>
+            <li>
+              104 ({
+                this.state.keyword ?
+                this.state.cases104Count :
+                this.props.cases104TotalCount
+              }/{this.props.cases104TotalCount})</li>
             <ul>
               {this.renderCases104()}
             </ul>
           </div>
           <div className="col s4">
-            <li>518 ({this.props.cases518Count})</li>
+            <li>
+              518 ({
+                this.state.keyword ?
+                this.state.cases518Count :
+                this.props.cases518TotalCount
+              }/{this.props.cases518TotalCount})</li>
             <ul>
               {this.renderCases518()}
             </ul>
           </div>
           <div className="col s4">
-            <li>Ptt ({this.props.casesPttCount})</li>
+            <li>
+              Ptt ({
+                this.state.keyword ?
+                this.state.casesPttCount :
+                this.props.casesPttTotalCount
+              }/{this.props.casesPttTotalCount})</li>
             <ul>
               {this.renderCasesPtt()}
             </ul>
