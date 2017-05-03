@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class CasePtt extends Component {
-  constructor() {
-    super();
-  }
-
   render() {
     return (
       <li className="case-ptt">

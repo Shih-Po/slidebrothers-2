@@ -7,7 +7,6 @@ import Cases104 from '../api/cases_104/collections';
 import Cases518 from '../api/cases_518/collections';
 import CasesPtt from '../api/cases_ptt/collections';
 import Tasks from '../api/tasks';
-import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
 import Case104 from './Case104.jsx';
 import Case518 from './Case518.jsx';
@@ -99,8 +98,6 @@ class App extends Component {
           <h1>接案佈告欄</h1>
         </header>
 
-        {/*<h1>Todo List ({this.props.incompleteCount})</h1>*/}
-
         <div className="row">
           <div className="input-field col s10 offset-s1">
             <input
@@ -173,7 +170,6 @@ App.propTypes = {
   cases518Count: PropTypes.number.isRequired,
   casesPttCount: PropTypes.number.isRequired,
   tasks: PropTypes.array.isRequired,
-  incompleteCount: PropTypes.number.isRequired,
   currentUser: PropTypes.object,
 };
 
