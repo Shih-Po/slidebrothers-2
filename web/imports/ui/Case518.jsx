@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class Case518 extends Component {
-  render() {
-    return (
-      <li className="case-518">
-        <label className="text">
-          <strong>{this.props.case518.title}</strong>
-        </label>
-      </li>
-    );
-  }
+export default function Case518(props) {
+  return (
+    <li className="case-518">
+      <span className="text">
+        <strong>{props.case518.title}</strong>
+      </span>
+    </li>
+  );
 }
 
 Case518.propTypes = {
