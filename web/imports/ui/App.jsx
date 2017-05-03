@@ -25,14 +25,27 @@ class App extends Component {
     };
   }
 
+  handleKeyUp(event) {
     event.preventDefault();
 
     const text = this.textInput.value.trim();
 
+    const cases104 = this.props.cases104.filter(
+      case104 => case104.title && case104.title.includes(text),
+    );
 
+    const cases518 = this.props.cases518.filter(
+      case518 => case518.title && case518.title.includes(text),
+    );
 
+    const casesPtt = this.props.casesPtt.filter(
+      casePtt => casePtt.title && casePtt.title.includes(text),
+    );
 
     this.setState({
+      cases104Count: cases104.length,
+      cases518Count: cases518.length,
+      casesPttCount: casesPtt.length,
       keyword: text,
     });
   }
