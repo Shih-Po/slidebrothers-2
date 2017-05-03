@@ -14,5 +14,5 @@ export default class Case518 extends Component {
 }
 
 Case518.propTypes = {
-  case518: PropTypes.object.isRequired,
+  case518: PropTypes.shape().isRequired,
 };

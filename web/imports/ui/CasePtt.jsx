@@ -14,5 +14,5 @@ export default class CasePtt extends Component {
 }
 
 CasePtt.propTypes = {
-  casePtt: PropTypes.object.isRequired,
+  casePtt: PropTypes.shape().isRequired,
 };

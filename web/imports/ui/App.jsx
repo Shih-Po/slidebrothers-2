@@ -97,12 +97,12 @@ class App extends Component {
 }
 
 App.propTypes = {
-  cases104: PropTypes.array.isRequired,
-  cases518: PropTypes.array.isRequired,
-  casesPtt: PropTypes.array.isRequired,
-  cases104Count: PropTypes.number.isRequired,
-  cases518Count: PropTypes.number.isRequired,
-  casesPttCount: PropTypes.number.isRequired,
+  cases104: PropTypes.arrayOf(Object).isRequired,
+  cases518: PropTypes.arrayOf(Object).isRequired,
+  casesPtt: PropTypes.arrayOf(Object).isRequired,
+  cases104TotalCount: PropTypes.number.isRequired,
+  cases518TotalCount: PropTypes.number.isRequired,
+  casesPttTotalCount: PropTypes.number.isRequired,
 };
 
 export default createContainer(() => {
