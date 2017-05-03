@@ -19,8 +19,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
     this.state = {
       hideCompleted: false,
+      keyword: '',
     };
     this.toggleHideCompleted = this.toggleHideCompleted.bind(this);
   }
