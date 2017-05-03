@@ -19,6 +19,9 @@ class App extends Component {
     this.state = {
       hideCompleted: false,
       keyword: '',
+      cases104Count: 0,
+      cases518Count: 0,
+      casesPttCount: 0,
     };
   }
 
