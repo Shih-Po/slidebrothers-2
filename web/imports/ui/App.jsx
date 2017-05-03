@@ -53,18 +53,21 @@ class App extends Component {
   renderCases104() {
     return this.props.cases104
       .filter(case104 => case104.title && case104.title.includes(this.state.keyword))
+      .slice(0, 50)
       .map(case104 => (<Case104 key={case104._id} case104={case104} />));
   }
 
   renderCases518() {
     return this.props.cases518
       .filter(case518 => case518.title && case518.title.includes(this.state.keyword))
+      .slice(0, 50)
       .map(case518 => (<Case518 key={case518._id} case518={case518} />));
   }
 
   renderCasesPtt() {
     return this.props.casesPtt
       .filter(casePtt => casePtt.title && casePtt.title.includes(this.state.keyword))
+      .slice(0, 50)
       .map(casePtt => (<CasePtt key={casePtt._id} casePtt={casePtt} />));
   }
 
