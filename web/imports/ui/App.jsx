@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Meteor } from 'meteor/meteor';
+import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
+import { SubsManager } from 'meteor/meteorhacks:subs-manager';
 
 import Cases104 from '../api/cases_104/collections';
 import Cases518 from '../api/cases_518/collections';
@@ -11,6 +12,7 @@ import Case104 from './Case104.jsx';
 import Case518 from './Case518.jsx';
 import CasePtt from './CasePtt.jsx';
 
+const subsManager = new SubsManager();
 // App component - represents the whole app
 class App extends Component {
   constructor(props) {
@@ -140,10 +142,9 @@ App.propTypes = {
 };
 
 export default createContainer(() => {
-  Meteor.subscribe('tasks');
-  Meteor.subscribe('case_104');
-  Meteor.subscribe('case_518');
-  Meteor.subscribe('case_ptt');
+  subsManager.subscribe('case_104');
+  subsManager.subscribe('case_518');
+  subsManager.subscribe('case_ptt');
 
   return {
     cases104: Cases104.find({}, { sort: { _id: -1 } }).fetch(),
