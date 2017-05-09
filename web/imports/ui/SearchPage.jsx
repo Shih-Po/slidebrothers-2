@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Meteor } from 'meteor/meteor';
 import { SubsManager } from 'meteor/meteorhacks:subs-manager';
 
 import Cases104 from '../api/cases_104/collections';
@@ -13,8 +12,8 @@ import Case518 from './Case518.jsx';
 import CasePtt from './CasePtt.jsx';
 
 const subsManager = new SubsManager();
-// App component - represents the whole app
-class App extends Component {
+
+class SearchPage extends Component {
   constructor(props) {
     super(props);
     this.handleKeyUp = this.handleKeyUp.bind(this);
@@ -75,11 +74,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <header>
-          <h1>接案佈告欄</h1>
-        </header>
-
+      <div className="search-page">
         <div className="row">
           <div className="input-field col s10 offset-s1">
             <input
@@ -99,7 +94,8 @@ class App extends Component {
                 this.state.keyword ?
                 this.state.cases104Count :
                 this.props.cases104TotalCount
-              }/{this.props.cases104TotalCount})</li>
+              }/{this.props.cases104TotalCount})
+            </li>
             <ul>
               {this.renderCases104()}
             </ul>
@@ -110,7 +106,8 @@ class App extends Component {
                 this.state.keyword ?
                 this.state.cases518Count :
                 this.props.cases518TotalCount
-              }/{this.props.cases518TotalCount})</li>
+              }/{this.props.cases518TotalCount})
+            </li>
             <ul>
               {this.renderCases518()}
             </ul>
@@ -121,7 +118,8 @@ class App extends Component {
                 this.state.keyword ?
                 this.state.casesPttCount :
                 this.props.casesPttTotalCount
-              }/{this.props.casesPttTotalCount})</li>
+                }/{this.props.casesPttTotalCount})
+            </li>
             <ul>
               {this.renderCasesPtt()}
             </ul>
@@ -132,7 +130,7 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
+SearchPage.propTypes = {
   cases104: PropTypes.arrayOf(Object).isRequired,
   cases518: PropTypes.arrayOf(Object).isRequired,
   casesPtt: PropTypes.arrayOf(Object).isRequired,
@@ -140,6 +138,7 @@ App.propTypes = {
   cases518TotalCount: PropTypes.number.isRequired,
   casesPttTotalCount: PropTypes.number.isRequired,
 };
+
 
 export default createContainer(() => {
   subsManager.subscribe('case_104');
@@ -154,4 +153,4 @@ export default createContainer(() => {
     cases518TotalCount: Cases518.find().count(),
     casesPttTotalCount: CasesPtt.find().count(),
   };
-}, App);
+}, SearchPage);
