@@ -27,15 +27,16 @@ CasePage.propTypes = {
 
 export default createContainer(({ _id, type }) => {
   const props = {};
+  const caseId = new Mongo.ObjectID(_id);
   switch (type) {
     case '104':
-      props.aCase = Cases104.findOne(new Mongo.ObjectID(_id));
+      props.aCase = Cases104.findOne(caseId);
       break;
     case '518':
-      props.aCase = Cases518.findOne(_id);
+      props.aCase = Cases518.findOne(caseId);
       break;
     case 'ptt':
-      props.aCase = CasesPtt.findOne(_id);
+      props.aCase = CasesPtt.findOne(caseId);
       break;
     default:
       break;
