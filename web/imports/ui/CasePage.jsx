@@ -9,13 +9,15 @@ import CasesPtt from '../api/cases_ptt/collections';
 
 class CasePage extends Component {
   renderDetail() {
-    return Object.entries(this.props.aCase).map(entry => <div>{entry[0]}</div>);
+    return Object.entries(this.props.aCase).map(entry => <li>{entry[1].toString()}</li>);
   }
 
   render() {
     return (
       <div className="case-page">
-        {this.renderDetail()}
+        <ul>
+          {this.renderDetail()}
+        </ul>
       </div>
     );
   }
