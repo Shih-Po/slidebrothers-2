@@ -9,15 +9,46 @@ import CasesPtt from '../api/cases_ptt/collections';
 
 class CasePage extends Component {
   renderDetail() {
-    return Object.entries(this.props.aCase).map(entry => <li>{entry[1].toString()}</li>);
+    return Object.entries(this.props.aCase).slice(1).map((entry) => {
+      const key = entry[0];
+      const value = entry[1];
+      if (key === '_id' || key === 'title' || key === 'content' || key === 'link' || key === 'url') return null;
+      return (<tr><td>{key.replace('_', ' ').toUpperCase()}</td><td>{value.toString()}</td></tr>);
+    });
+  }
+
+  renderTitle() {
+    return Object.entries(this.props.aCase).find(entry => entry[0] === 'title')[1];
+  }
+
+  renderContent() {
+    return Object.entries(this.props.aCase).find(entry => entry[0] === 'content')[1];
+  }
+
+  renderHref() {
+    return Object.entries(this.props.aCase).find(entry => entry[0] === 'link' || entry[0] === 'url')[1];
   }
 
   render() {
     return (
       <div className="case-page">
-        <ul>
-          {this.renderDetail()}
-        </ul>
+        <table className="highlight">
+          <tbody>
+            <tr>
+              <td colSpan="2" className="case-title">
+                {this.renderTitle()} &emsp;
+                <a
+                  className="waves-effect waves-light btn"
+                  href={this.renderHref()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >接案去!</a>
+              </td>
+            </tr>
+            <tr><td colSpan="2">{this.renderContent()}</td></tr>
+            {this.renderDetail()}
+          </tbody>
+        </table>
       </div>
     );
   }
