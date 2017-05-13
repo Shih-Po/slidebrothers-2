@@ -39,7 +39,7 @@ class CasePage extends Component {
         <table className="highlight">
           <tbody>
             <tr>
-              <td colSpan="2" className="case-title">
+              <td className="case-title">
                 {this.renderTitle()} &emsp;
                 <a
                   className="waves-effect waves-light btn"
@@ -49,7 +49,7 @@ class CasePage extends Component {
                 >接案去!</a>
               </td>
             </tr>
-            <tr><td colSpan="2">{this.renderContent()}</td></tr>
+            <tr><td className="case-content">{this.renderContent()}</td></tr>
             {this.renderDetail()}
           </tbody>
         </table>
