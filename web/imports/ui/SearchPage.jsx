@@ -32,15 +32,15 @@ class SearchPage extends Component {
     const text = this.textInput.value.trim();
 
     const cases104 = this.props.cases104.filter(
-      case104 => case104.title && case104.title.includes(text),
+      case104 => (case104.title && case104.title.includes(text)) || case104.content.includes(text),
     );
 
     const cases518 = this.props.cases518.filter(
-      case518 => case518.title && case518.title.includes(text),
+      case518 => (case518.title && case518.title.includes(text)) || case518.content.includes(text),
     );
 
     const casesPtt = this.props.casesPtt.filter(
-      casePtt => casePtt.title && casePtt.title.includes(text),
+      casePtt => (casePtt.title && casePtt.title.includes(text)) || casePtt.content.includes(text),
     );
 
     this.setState({
@@ -52,22 +52,25 @@ class SearchPage extends Component {
   }
 
   renderCases104() {
+    const keyword = this.state.keyword;
     return this.props.cases104
-      .filter(case104 => case104.title && case104.title.includes(this.state.keyword))
+      .filter(case104 => (case104.title && case104.title.includes(keyword)) || case104.content.includes(keyword))
       .slice(0, 50)
       .map(case104 => (<Case104 key={case104._id} case104={case104} />));
   }
 
   renderCases518() {
+    const keyword = this.state.keyword;
     return this.props.cases518
-      .filter(case518 => case518.title && case518.title.includes(this.state.keyword))
+      .filter(case518 => (case518.title && case518.title.includes(keyword)) || case518.content.includes(keyword))
       .slice(0, 50)
       .map(case518 => (<Case518 key={case518._id} case518={case518} />));
   }
 
   renderCasesPtt() {
+    const keyword = this.state.keyword;
     return this.props.casesPtt
-      .filter(casePtt => casePtt.title && casePtt.title.includes(this.state.keyword))
+      .filter(casePtt => (casePtt.title && casePtt.title.includes(keyword)) || casePtt.content.includes(keyword))
       .slice(0, 50)
       .map(casePtt => (<CasePtt key={casePtt._id} casePtt={casePtt} />));
   }
