@@ -8,11 +8,9 @@ export default class CasePtt extends Component {
 
   render() {
     return (
-      <li className="case-ptt">
-        <span className="text">
-          <a href={CasePtt.href(this.props.casePtt._id)}>{this.props.casePtt.title}</a>
-        </span>
-      </li>
+      <a className="collection-item" href={CasePtt.href(this.props.casePtt._id)}>
+        {this.props.casePtt.title}
+      </a>
     );
   }
 }

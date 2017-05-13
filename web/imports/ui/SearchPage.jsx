@@ -89,40 +89,40 @@ class SearchPage extends Component {
 
         <div className="row">
           <div className="col s4">
-            <li>
+            <div>
               104 ({
                 this.state.keyword ?
                 this.state.cases104Count :
                 this.props.cases104TotalCount
               }/{this.props.cases104TotalCount})
-            </li>
-            <ul>
+            </div>
+            <div className="collection">
               {this.renderCases104()}
-            </ul>
+            </div>
           </div>
           <div className="col s4">
-            <li>
+            <div>
               518 ({
                 this.state.keyword ?
                 this.state.cases518Count :
                 this.props.cases518TotalCount
               }/{this.props.cases518TotalCount})
-            </li>
-            <ul>
+            </div>
+            <div className="collection">
               {this.renderCases518()}
-            </ul>
+            </div>
           </div>
           <div className="col s4">
-            <li>
+            <div>
               Ptt ({
                 this.state.keyword ?
                 this.state.casesPttCount :
                 this.props.casesPttTotalCount
                 }/{this.props.casesPttTotalCount})
-            </li>
-            <ul>
+            </div>
+            <div className="collection">
               {this.renderCasesPtt()}
-            </ul>
+            </div>
           </div>
         </div>
       </div>

@@ -8,11 +8,9 @@ export default class Case104 extends Component {
 
   render() {
     return (
-      <li className="case-104">
-        <span className="text">
-          <a href={Case104.href(this.props.case104._id)}>{this.props.case104.title}</a>
-        </span>
-      </li>
+      <a className="collection-item" href={Case104.href(this.props.case104._id)}>
+        {this.props.case104.title}
+      </a>
     );
   }
 }
