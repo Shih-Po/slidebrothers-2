@@ -5,7 +5,7 @@ export default function MainLayout({ content }) {
   return (
     <div className="container">
       <header>
-        <h1>接案佈告欄</h1>
+        <a className="header" href="/">接案佈告欄</a>
       </header>
       <main>
         { content }
