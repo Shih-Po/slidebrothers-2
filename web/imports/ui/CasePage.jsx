@@ -13,7 +13,11 @@ class CasePage extends Component {
       const key = entry[0];
       const value = entry[1];
       if (key === '_id' || key === 'title' || key === 'content' || key === 'link' || key === 'url') return null;
-      return (<tr><td>{key.replace('_', ' ').toUpperCase()}</td><td>{value.toString()}</td></tr>);
+      return (
+        <tr>
+          <td className="case-detail">{key.replace('_', ' ').toUpperCase()} : {value ? value.toString() : ''}</td>
+        </tr>
+      );
     });
   }
 
