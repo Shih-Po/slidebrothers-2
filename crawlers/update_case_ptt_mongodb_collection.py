@@ -1,4 +1,4 @@
-import time
+import os, time
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -68,7 +68,7 @@ if __name__ == '__main__':
 
     # 5. send df to MongoDB
     from pymongo import MongoClient
-    from config import mongo_uri
+    mongo_uri = os.environ['MONGODB_URI']
     client = MongoClient(mongo_uri)
     db = client['heroku_ltkbmr55']
 
