@@ -1,6 +1,7 @@
 *.ipynb_*
 *__pycache__*
 *DS_Store*
+.venv
 
 crawlers/drivers/*
 crawlers/ghostdriver.log
