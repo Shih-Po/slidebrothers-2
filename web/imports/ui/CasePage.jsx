@@ -26,7 +26,8 @@ class CasePage extends Component {
   }
 
   renderContent() {
-    return Object.entries(this.props.aCase).find(entry => entry[0] === 'content')[1];
+    const content = Object.entries(this.props.aCase).find(entry => entry[0] === 'content')[1];
+    return content.split('\n').map(p => (<span>{p}<br /></span>));
   }
 
   renderHref() {
@@ -40,7 +41,7 @@ class CasePage extends Component {
           <tbody>
             <tr>
               <td className="case-title">
-                {this.renderTitle()} &emsp;
+                {this.renderTitle()} <br />
                 <a
                   className="waves-effect waves-light btn"
                   href={this.renderHref()}
