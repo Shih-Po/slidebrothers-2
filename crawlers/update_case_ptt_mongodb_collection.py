@@ -33,14 +33,14 @@ def get_single_ptt_case_info(url):
     try:
         author = meta_values[0].text
         title = meta_values[2].text
-        time = meta_values[3].text
+        post_date = meta_values[3].text
 
         main_contents = soup.select_one('div#main-content').text.split('\n')[1:]
         content = '\n'.join([line.replace('\t', '') for line in main_contents if line != ''])
     except IndexError as e:
         return {'url': url}
     
-    return (url, author, title, time, content)
+    return (url, author, title, post_date, content)
 
 
 def get_full_ptt_case_df(i=355):
@@ -54,8 +54,8 @@ def get_full_ptt_case_df(i=355):
         rows.append(row)
 
     df = pd.DataFrame(rows)
-    df.columns = ['url', 'author', 'title', 'time', 'content']
-    df['time'] = pd.to_datetime(df['time'], format='%a %b %d %H:%M:%S %Y')
+    df.columns = ['link', 'author', 'title', 'post_date', 'content']
+    df['post_date'] = pd.to_datetime(df['post_date'], format='%a %b %d %H:%M:%S %Y')
     return df[df['title'].notnull()].reset_index(drop=True)
 
 
@@ -65,14 +65,21 @@ if __name__ == '__main__':
     # 3. append to df
     # 4. parse df
     df = get_full_ptt_case_df()
+    df['source'] = 'ptt'
 
     # 5. send df to MongoDB
     from pymongo import MongoClient
-    mongo_uri = os.environ['MONGODB_URI']
+    from config import mongo_uri
     client = MongoClient(mongo_uri)
     db = client['heroku_ltkbmr55']
 
     _collection = df.to_dict(orient='records')
+
+    # for single collection
     db['case_ptt'].drop() # drop existed collection
     db['case_ptt'].insert_many(_collection)
+
+    # for merged collection
+    db['cases'].delete_many({'source': 'ptt'})
+    db['cases'].insert_many(_collection)
     print('\n{}\nUpdate case_ptt collection successed!\n'.format('='*80))

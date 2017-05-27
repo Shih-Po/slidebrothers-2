@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 import numpy as np
-import time
+import time, random
 from tqdm import tqdm
 
 def get_518_login_session(WEBDRIBER_PATH):
@@ -19,7 +19,8 @@ def get_518_login_session(WEBDRIBER_PATH):
     br.find_element_by_id('account').send_keys(account)
     br.find_element_by_id('pwd').send_keys(pwd)
     br.find_element_by_xpath('//*[@id="content-inner"]/form/div/p[4]/input').click()
-    
+
+    time.sleep(2)
     br.get('http://case.518.com.tw/casepage-index.html')
     s = requests.Session()
     for c in br.get_cookies():
@@ -50,13 +51,15 @@ def get_case_list_df_by_page_url(page_url):
         'location': locations,
         'post_date': post_dates
     })
+    df['post_date'] = pd.to_datetime(df['post_date']) # transformed post_date
     time.sleep(1)
     return df
 
 def get_basic_info_df(section_url):
     # 1. 
     def get_final_page(section_url):
-        soup = BeautifulSoup(s.get(section_url).text, 'html.parser')
+        _res = s.get(section_url)
+        soup = BeautifulSoup(_res.text, 'html.parser')
         return int(soup.select_one('span.pagecountnum span').text\
                                                             .split('/')[1]\
                                                             .strip())
@@ -93,7 +96,7 @@ def get_advance_info_df(basic_info_df):
         time_limit = soup.select_one('dd.date').text.strip()
         owner_positive = soup.select_one('p.positive').text.strip()
 
-        time.sleep(0.5)
+        time.sleep(random.randint(1, 5))
         return (link, content, office, time_limit, owner_positive)
 
     # 2. 
@@ -111,7 +114,8 @@ if __name__ == '__main__':
         print('\n{sep}\n{statement}'.format(sep='='*80, statement=statement))
 
     print_step('1. get case 518 website login session')
-    WEBDRIBER_PATH = './drivers/phantomjs-2.1.1-macosx/bin/phantomjs'
+    # WEBDRIBER_PATH = './drivers/phantomjs-2.1.1-macosx/bin/phantomjs'
+    WEBDRIBER_PATH = './drivers/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'
     s = get_518_login_session(WEBDRIBER_PATH)
 
     print_step('2. Gather case_basic_info from every page of section')
@@ -121,7 +125,8 @@ if __name__ == '__main__':
     print_step('3. gather case_advance_info from every link of basic_info_df')
     advance_info_df = get_advance_info_df(basic_info_df)
     rs_df = basic_info_df.merge(advance_info_df, on='link')
-
+    rs_df['source'] = '518'
+    
     print_step('4. send rs_df to MongoDB')
     from pymongo import MongoClient
     from config import mongo_uri
@@ -129,5 +134,12 @@ if __name__ == '__main__':
     db = client['heroku_ltkbmr55']
 
     _collection = rs_df.to_dict(orient='records')
+    # for single collection
     db['case_518'].drop() # drop existed collection
     db['case_518'].insert_many(_collection)
+
+    # for merged collection
+    db['cases'].delete_many({'source': '518'})
+    db['cases'].insert_many(_collection)
+    print('\n{}\nUpdate case_518 collection successed!\n'.format('='*80))
+

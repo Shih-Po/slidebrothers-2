@@ -74,7 +74,7 @@ def get_advance_info_df(basic_info_df):
         while not row:
             try:
                 br.get(case_link)
-                time.sleep(1.5)
+                time.sleep(1)
                 
                 case_type = br.find_element_by_xpath(xpath_pair['case_type']).text.strip()
                 budget = br.find_element_by_xpath(xpath_pair['budget']).text.strip()
@@ -106,7 +106,10 @@ def get_advance_info_df(basic_info_df):
             if count > 3:
                 break
 
-    return pd.DataFrame(record, columns=['link'] + [k for k in xpath_pair])
+    cols = ['link', 'case_type', 'budget', 'content', 'view', 
+            'propose_amount', 'location', 'office', 'owner_type',
+            'average_price', 'highest_price', 'lowest_price']
+    return pd.DataFrame(record, columns=cols)
 
 
 if __name__ == '__main__':
@@ -116,7 +119,8 @@ if __name__ == '__main__':
     print_step('0. Use selenium browser and keep it alive')
     # WEBDRIBER_PATH = './drivers/chromedriver_mac64'
     # br = webdriver.Chrome(WEBDRIBER_PATH)
-    WEBDRIBER_PATH = './drivers/phantomjs-2.1.1-macosx/bin/phantomjs'
+    # WEBDRIBER_PATH = './drivers/phantomjs-2.1.1-macosx/bin/phantomjs'
+    WEBDRIBER_PATH = './drivers/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'
     br = webdriver.PhantomJS(WEBDRIBER_PATH)
 
     print_step('1. Fill info to login')
@@ -131,6 +135,8 @@ if __name__ == '__main__':
     print_step('3. Get advance_info_df by case_link of basic_info_df')
     advance_info_df = get_advance_info_df(basic_info_df)
     rs_df = basic_info_df.merge(advance_info_df, on='link')
+    rs_df['source'] = '104'
+    rs_df['post_date'] = pd.to_datetime('2017-05-01') # Add fake post_date
     br.quit()
 
     print_step('4. send rs_df to MongoDB')
@@ -140,6 +146,11 @@ if __name__ == '__main__':
     db = client['heroku_ltkbmr55']
 
     _collection = rs_df.to_dict(orient='records')
+    # for single collection
     db['case_104'].drop() # drop existed collection
     db['case_104'].insert_many(_collection)
 
+    # for merged collection
+    db['cases'].delete_many({'source': '104'})
+    db['cases'].insert_many(_collection)
+    print('\n{}\nUpdate case_104 collection successed!\n'.format('='*80))
