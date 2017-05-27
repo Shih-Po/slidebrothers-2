@@ -4,5 +4,5 @@
 .venv
 
 crawlers/drivers/*
-crawlers/ghostdriver.log
+*ghostdriver.log
 crawlers/config.py
