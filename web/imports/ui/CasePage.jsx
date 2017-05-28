@@ -29,7 +29,7 @@ class CasePage extends React.Component {
   }
 
   renderHref() {
-    return Object.entries(this.props.aCase).find(entry => entry[0] === 'link' || entry[0] === 'url')[1];
+    return Object.entries(this.props.aCase).find(entry => entry[0] === 'link')[1];
   }
 
   render() {
