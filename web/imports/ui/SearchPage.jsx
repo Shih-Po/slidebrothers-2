@@ -14,7 +14,6 @@ class SearchPage extends React.Component {
     super(props);
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.state = {
-      hideCompleted: false,
       keyword: '',
       cases104Count: 0,
       cases518Count: 0,
