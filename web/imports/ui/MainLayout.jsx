@@ -14,6 +14,7 @@ export default function MainLayout({ content }) {
   );
 }
 
+// noinspection JSUnresolvedFunction
 MainLayout.propTypes = {
   content: PropTypes.element.isRequired,
 };

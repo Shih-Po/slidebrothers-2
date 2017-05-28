@@ -57,6 +57,7 @@ class CasePage extends React.Component {
   }
 }
 
+// noinspection JSUnresolvedFunction
 CasePage.propTypes = {
   aCase: PropTypes.shape().isRequired,
 };
