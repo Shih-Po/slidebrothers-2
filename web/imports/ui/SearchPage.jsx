@@ -15,11 +15,8 @@ class SearchPage extends React.Component {
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.state = {
       cases104Count: 0,
-      cases104TotalCount: 0,
       cases518Count: 0,
-      cases518TotalCount: 0,
       casesPttCount: 0,
-      casesPttTotalCount: 0,
       filteredCases: [],
       keyword: '',
     };
@@ -55,7 +52,10 @@ class SearchPage extends React.Component {
   }
 
   renderCases() {
-    return this.state.filteredCases.slice(0, 50)
+    const text = this.state.keyword;
+    return this.props.cases
+      .filter(aCase => (aCase.title && aCase.title.includes(text)) || aCase.content.includes(text))
+      .slice(0, 50)
       .map(aCase => (<Case key={aCase._id} aCase={aCase} />));
   }
 
@@ -75,26 +75,26 @@ class SearchPage extends React.Component {
         </div>
 
         <div className="row">
-          <div className="col s4">
+          <div className="center aligned orange-text col s4">
             104 ({
               this.state.keyword ?
               this.state.cases104Count :
-              this.state.cases104TotalCount
-            }/{this.state.cases104TotalCount})
+              this.props.cases104TotalCount
+            }/{this.props.cases104TotalCount})
           </div>
-          <div className="col s4">
+          <div className="center aligned green-text col s4">
             518 ({
             this.state.keyword ?
               this.state.cases518Count :
-              this.state.cases518TotalCount
-          }/{this.state.cases518TotalCount})
+              this.props.cases518TotalCount
+          }/{this.props.cases518TotalCount})
           </div>
-          <div className="col s4">
+          <div className="center aligned purple-text col s4">
             PTT ({
             this.state.keyword ?
               this.state.casesPttCount :
-              this.state.casesPttTotalCount
-          }/{this.state.casesPttTotalCount})
+              this.props.casesPttTotalCount
+          }/{this.props.casesPttTotalCount})
           </div>
           <div className="col s12">
             <div className="collection">
@@ -107,9 +107,12 @@ class SearchPage extends React.Component {
   }
 }
 
-// noinspection JSUnresolvedFunction
+// noinspection JSUnresolvedFunction, JSUnresolvedVariable
 SearchPage.propTypes = {
   cases: PropTypes.arrayOf(Object).isRequired,
+  cases104TotalCount: PropTypes.number.isRequired,
+  cases518TotalCount: PropTypes.number.isRequired,
+  casesPttTotalCount: PropTypes.number.isRequired,
 };
 
 
@@ -118,5 +121,8 @@ export default createContainer(() => {
 
   return {
     cases: Cases.find({}, { sort: { post_date: -1 } }).fetch(),
+    cases104TotalCount: Cases.find({ source: '104' }).count(),
+    cases518TotalCount: Cases.find({ source: '518' }).count(),
+    casesPttTotalCount: Cases.find({ source: 'ptt' }).count(),
   };
 }, SearchPage);
