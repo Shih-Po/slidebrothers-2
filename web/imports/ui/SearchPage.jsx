@@ -96,7 +96,7 @@ class SearchPage extends React.Component {
               this.props.casesPttTotalCount
           }/{this.props.casesPttTotalCount})
           </div>
-          <div className="col s12">
+          <div className="col s10 offset-s1">
             <div className="collection">
               {this.renderCases()}
             </div>
