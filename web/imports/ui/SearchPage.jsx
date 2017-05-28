@@ -131,12 +131,7 @@ class SearchPage extends React.Component {
 
 // noinspection JSUnresolvedFunction
 SearchPage.propTypes = {
-  cases104: PropTypes.arrayOf(Object).isRequired,
-  cases518: PropTypes.arrayOf(Object).isRequired,
-  casesPtt: PropTypes.arrayOf(Object).isRequired,
-  cases104TotalCount: PropTypes.number.isRequired,
-  cases518TotalCount: PropTypes.number.isRequired,
-  casesPttTotalCount: PropTypes.number.isRequired,
+  cases: PropTypes.arrayOf(Object).isRequired,
 };
 
 
