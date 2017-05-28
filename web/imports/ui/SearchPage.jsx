@@ -14,7 +14,6 @@ class SearchPage extends React.Component {
     super(props);
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.state = {
-      keyword: '',
       cases104Count: 0,
       cases104TotalCount: 0,
       cases518Count: 0,
@@ -22,6 +21,7 @@ class SearchPage extends React.Component {
       casesPttCount: 0,
       casesPttTotalCount: 0,
       filteredCases: [],
+      keyword: '',
     };
   }
 
@@ -50,6 +50,7 @@ class SearchPage extends React.Component {
       cases518Count: cases.filter(aCase => aCase.source === '518').length,
       casesPttCount: cases.filter(aCase => aCase.source === 'ptt').length,
       filteredCases: cases,
+      keyword: text,
     });
   }
 
@@ -75,13 +76,27 @@ class SearchPage extends React.Component {
 
         <div className="row">
           <div className="col s4">
-            <div>
-              104 ({
-                this.state.keyword ?
-                this.state.cases104Count :
-                this.props.cases104TotalCount
-              }/{this.props.cases104TotalCount})
-            </div>
+            104 ({
+              this.state.keyword ?
+              this.state.cases104Count :
+              this.state.cases104TotalCount
+            }/{this.state.cases104TotalCount})
+          </div>
+          <div className="col s4">
+            518 ({
+            this.state.keyword ?
+              this.state.cases518Count :
+              this.state.cases518TotalCount
+          }/{this.state.cases518TotalCount})
+          </div>
+          <div className="col s4">
+            PTT ({
+            this.state.keyword ?
+              this.state.casesPttCount :
+              this.state.casesPttTotalCount
+          }/{this.state.casesPttTotalCount})
+          </div>
+          <div className="col s12">
             <div className="collection">
               {this.renderCases()}
             </div>
@@ -101,7 +116,7 @@ SearchPage.propTypes = {
 export default createContainer(() => {
   subsManager.subscribe('cases');
 
-  return subsManager.ready() ? {
+  return {
     cases: Cases.find({}, { sort: { post_date: -1 } }).fetch(),
-  } : { cases: [] };
+  };
 }, SearchPage);
