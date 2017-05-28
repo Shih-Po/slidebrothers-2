@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { Mongo } from 'meteor/mongo';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import Cases from '../api/cases/collections';
 
-class CasePage extends Component {
+class CasePage extends React.Component {
   renderDetail() {
     return Object.entries(this.props.aCase).slice(1).map((entry) => {
       const key = entry[0];

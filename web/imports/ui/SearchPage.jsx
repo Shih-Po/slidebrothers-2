@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { SubsManager } from 'meteor/meteorhacks:subs-manager';
 
@@ -9,7 +9,7 @@ import Case from './Case.jsx';
 
 const subsManager = new SubsManager();
 
-class SearchPage extends Component {
+class SearchPage extends React.Component {
   constructor(props) {
     super(props);
     this.handleKeyUp = this.handleKeyUp.bind(this);
