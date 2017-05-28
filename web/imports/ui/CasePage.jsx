@@ -28,7 +28,7 @@ class CasePage extends React.Component {
     return content.split('\n').map(p => (<span>{p}<br /></span>));
   }
 
-  renderHref() {
+  renderLink() {
     return Object.entries(this.props.aCase).find(entry => entry[0] === 'link')[1];
   }
 
@@ -42,7 +42,7 @@ class CasePage extends React.Component {
                 {this.renderTitle()} <br />
                 <a
                   className="waves-effect waves-light btn"
-                  href={this.renderHref()}
+                  href={this.renderLink()}
                   target="_blank"
                   rel="noopener noreferrer"
                 >接案去!</a>
