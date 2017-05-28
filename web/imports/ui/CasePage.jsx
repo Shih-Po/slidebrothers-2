@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import { Mongo } from 'meteor/mongo';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import Cases104 from '../api/cases_104/collections';
-import Cases518 from '../api/cases_518/collections';
-import CasesPtt from '../api/cases_ptt/collections';
+import Cases from '../api/cases/collections';
 
 class CasePage extends Component {
   renderDetail() {
