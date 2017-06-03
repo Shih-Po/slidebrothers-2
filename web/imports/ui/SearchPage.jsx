@@ -120,7 +120,9 @@ export default createContainer(() => {
   subsManager.subscribe('cases');
 
   return {
-    cases: Cases.find({}, { sort: { post_date: -1 } }).fetch(),
+    cases: Cases.find({}, { sort: { title: 1 } }).fetch().sort((a, b) => {
+      return new Date(b.post_date.toDateString()) - new Date(a.post_date.toDateString());
+    }),
     cases104TotalCount: Cases.find({ source: '104' }).count(),
     cases518TotalCount: Cases.find({ source: '518' }).count(),
     casesPttTotalCount: Cases.find({ source: 'ptt' }).count(),
