@@ -12,7 +12,7 @@ const Case = ({ aCase }) => {
       className={`collection-item ${color}`}
       href={`/case/${aCase.source}/${aCase._id}`}
     >
-      {aCase.post_date.toLocaleString()} - {aCase.title}
+      {aCase.post_date.toDateString()} - {aCase.title}
     </a>
   );
 };
